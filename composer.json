@@ -1,0 +1,22 @@
+{
+  "name": "black-lamp/blcms-shop-subsite",
+  "description": "Shop Subsite module for Black-Lamp CMS",
+  "keywords": ["yii2", "shop", "subsite", "blcms"],
+  "type": "yii2-extension",
+  "authors": [
+    {
+      "name": "Gutsulyak Vadim",
+      "email": "guts.vadim@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=7.0",
+    "yiisoft/yii2": ">=2.0.4",
+    "black-lamp/blcms-shop": "v0.4.*"
+  },
+  "autoload": {
+    "psr-4": {
+      "bl\\cms\\shop\\subsite\\": ""
+    }
+  }
+}
