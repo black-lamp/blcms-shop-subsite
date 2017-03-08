@@ -14,14 +14,14 @@ use yii\base\Model;
  */
 class VendorModel extends Model
 {
-    private $entityName = 'Vendor';
+    public static $entityName = 'Vendor';
 
     public function save($data)
     {
         /* @var Vendor $vendor */
         $vendor = null;
         $queenId = $data['id'];
-        $vendorId = ShopEntityQueen::findEntityId($this->entityName, $queenId);
+        $vendorId = ShopEntityQueen::findEntityId(self::$entityName, $queenId);
 
         \Yii::error("vendorId: " . $vendorId, $this::className());
 
@@ -55,7 +55,7 @@ class VendorModel extends Model
                     }
                 }
 
-                ShopEntityQueen::saveQueenId($this->entityName, $vendor->id, $queenId);
+                ShopEntityQueen::saveQueenId(self::$entityName, $vendor->id, $queenId);
                 return true;
             }
             else {

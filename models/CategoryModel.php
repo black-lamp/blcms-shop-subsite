@@ -13,17 +13,15 @@ use yii\base\Model;
  */
 class CategoryModel extends Model
 {
-    private $entityName = 'Category';
+    public static $entityName = 'Category';
 
     public function save($data)
     {
         /* @var Category $category */
         $category = null;
         $queenId = $data['id'];
-        $categoryId = ShopEntityQueen::findEntityId($this->entityName, $queenId);
-        $parentId = ShopEntityQueen::findEntityId($this->entityName, $data['parent_id']);
-
-        \Yii::error("categoryId: " . $categoryId, $this::className());
+        $categoryId = ShopEntityQueen::findEntityId(self::$entityName, $queenId);
+        $parentId = ShopEntityQueen::findEntityId(self::$entityName, $data['parent_id']);
 
         if(!empty($categoryId)) {
             $category = Category::find()
@@ -56,7 +54,7 @@ class CategoryModel extends Model
                     }
                 }
 
-                ShopEntityQueen::saveQueenId($this->entityName, $category->id, $queenId);
+                ShopEntityQueen::saveQueenId(self::$entityName, $category->id, $queenId);
                 return true;
             }
             else {

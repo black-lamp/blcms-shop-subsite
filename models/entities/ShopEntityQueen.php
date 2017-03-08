@@ -49,10 +49,9 @@ class ShopEntityQueen extends ActiveRecord
     public static function findEntityId($entityName, $queenId) {
         /* @var ShopEntityQueen $entityQueen */
         $entityQueen = self::find()
-            ->where([
-                'entity_name' => $entityName,
-                'queen_id' => $queenId
-            ])->one();
+            ->where(['entity_name' => $entityName,])
+            ->andWhere(['queen_id' => $queenId])
+            ->one();
 
         if(!empty($entityQueen)) {
             return $entityQueen->entity_id;
