@@ -32,6 +32,10 @@ class CategoryModel extends Model
             $category = new Category();
         }
 
+        if(!$category->isNewRecord) {
+            $data['show'] = $category->show;
+        }
+
         if($category->load($data, '')) {
             $category->parent_id = $parentId;
             if($category->save()) {
@@ -45,6 +49,11 @@ class CategoryModel extends Model
 
                         if(empty($translation)) {
                             $translation = new CategoryTranslation();
+                        }
+
+                        if(!$translation->isNewRecord) {
+                            $translationData['title'] = $translation->title;
+                            $translationData['seoTitle'] = $translation->seoTitle;
                         }
 
                         if($translation->load($translationData, '')) {
