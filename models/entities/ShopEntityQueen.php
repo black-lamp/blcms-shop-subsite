@@ -60,6 +60,20 @@ class ShopEntityQueen extends ActiveRecord
         return null;
     }
 
+    public static function findQueenId($entityName, $entityId) {
+        /* @var ShopEntityQueen $entityQueen */
+        $entityQueen = self::find()
+            ->where(['entity_name' => $entityName,])
+            ->andWhere(['entity_id' => $entityId])
+            ->one();
+
+        if(!empty($entityQueen)) {
+            return $entityQueen->queen_id;
+        }
+
+        return null;
+    }
+
     public static function saveQueenId($entityName, $entityId, $queenId) {
         $entityQueen = ShopEntityQueen::findOne([
             'entity_name' => $entityName,
