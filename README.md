@@ -10,3 +10,14 @@ php yii migrate --migrationPath=@vendor/black-lamp/blcms-shop-subsite/migrations
         ],
     ]
 ```
+
+```
+    
+    'components' => [
+        'request' => [
+            'parsers' => [
+                'application/json' => 'yii\web\JsonParser',
+            ],
+        ],
+    ]
+```
