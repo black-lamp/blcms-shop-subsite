@@ -14,7 +14,8 @@ class ProductController extends BaseApiController
     public function actionUpdate() {
         if(\Yii::$app->request->isPost) {
             $post = \Yii::$app->request->post();
-//            \Yii::error($post, $this::className());
+
+            \Yii::error($post, $this::className());
 
             $model = new ProductModel();
             if($model->save($post)) {
