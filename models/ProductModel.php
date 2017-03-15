@@ -344,7 +344,13 @@ class ProductModel extends Model
 
                         if(!$translation->isNewRecord) {
                             $translationData['title'] = $translation->title;
+                            $translationData['full_text'] = $translation->full_text;
+                            $translationData['description'] = $translation->description;
+
+                            $translationData['seoUrl'] = $translation->seoUrl;
                             $translationData['seoTitle'] = $translation->seoTitle;
+                            $translationData['seoDescription'] = $translation->seoDescription;
+                            $translationData['seoKeywords'] = $translation->seoKeywords;
                         }
 
                         if($translation->load($translationData, '')) {
