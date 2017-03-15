@@ -34,6 +34,10 @@ class CategoryModel extends Model
 
         if(!$category->isNewRecord) {
             $data['show'] = $category->show;
+            $data['cover'] = $category->cover;
+            $data['thumbnail'] = $category->thumbnail;
+            $data['menu_item'] = $category->menu_item;
+            $data['position'] = $category->position;
         }
 
         if($category->load($data, '')) {
@@ -54,6 +58,9 @@ class CategoryModel extends Model
                         if(!$translation->isNewRecord) {
                             $translationData['title'] = $translation->title;
                             $translationData['seoTitle'] = $translation->seoTitle;
+                            $translationData['seoDescription'] = $translation->seoDescription;
+                            $translationData['seoKeywords'] = $translation->seoKeywords;
+                            $translationData['description'] = $translation->description;
                         }
 
                         if($translation->load($translationData, '')) {
