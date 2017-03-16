@@ -49,6 +49,10 @@ class ProductModel extends Model
             $product = new Product();
         }
 
+        if(!$product->isNewRecord) {
+            $data['show'] = $product->show;
+        }
+
         if($product->load($data, '')) {
             $product->category_id = $categoryId;
             $product->vendor_id = $vendorId;
