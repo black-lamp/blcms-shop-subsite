@@ -51,6 +51,8 @@ class ProductModel extends Model
 
         if(!$product->isNewRecord) {
             $data['show'] = $product->show;
+            $data['new'] = $product->new;
+            $data['popular'] = $product->popular;
         }
 
         if($product->load($data, '')) {
