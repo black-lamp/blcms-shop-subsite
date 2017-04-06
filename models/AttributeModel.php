@@ -8,6 +8,7 @@ use bl\cms\shop\common\entities\ShopAttributeValue;
 use bl\cms\shop\common\entities\ShopAttributeValueColorTexture;
 use bl\cms\shop\common\entities\ShopAttributeValueTranslation;
 use bl\cms\shop\subsite\models\entities\ShopEntityQueen;
+use Yii;
 use yii\base\Model;
 use yii\web\ServerErrorHttpException;
 
@@ -90,24 +91,26 @@ class AttributeModel extends Model
                                         $translation = new ShopAttributeValueTranslation();
                                     }
 
-                                    if(!empty($valueTranslationData['shopAttributeValueColorTexture'])) {
-                                        $valueColorTextureId = ShopEntityQueen::findEntityId(ShopAttributeValueColorTexture::className(), $valueTranslationData['shopAttributeValueColorTexture']['id']);
+                                    if($attribute->type->title == "Color" || $attribute->type->title == "Texture") {
+                                        if(!empty($valueTranslationData['shopAttributeValueColorTexture'])) {
+                                            $valueColorTextureId = ShopEntityQueen::findEntityId(ShopAttributeValueColorTexture::className(), $valueTranslationData['shopAttributeValueColorTexture']['id']);
 
-                                        $valueColorTexture = ShopAttributeValueColorTexture::find()
-                                            ->where(['id' => $valueColorTextureId])
-                                            ->one();
+                                            $valueColorTexture = ShopAttributeValueColorTexture::find()
+                                                ->where(['id' => $valueColorTextureId])
+                                                ->one();
 
-                                        if(empty($valueColorTexture)) {
-                                            $valueColorTexture = new ShopAttributeValueColorTexture();
-                                        }
-
-                                        if($valueColorTexture->load($valueTranslationData['shopAttributeValueColorTexture'], '')) {
-                                            if($valueColorTexture->save()) {
-                                                ShopEntityQueen::saveQueenId(ShopAttributeValueColorTexture::className(), $valueColorTexture->id, $valueTranslationData['shopAttributeValueColorTexture']['id']);
-                                                $valueTranslationData['value'] = strval($valueColorTexture->id);
+                                            if(empty($valueColorTexture)) {
+                                                $valueColorTexture = new ShopAttributeValueColorTexture();
                                             }
-                                        }
 
+                                            if($valueColorTexture->load($valueTranslationData['shopAttributeValueColorTexture'], '')) {
+                                                if($valueColorTexture->save()) {
+                                                    ShopEntityQueen::saveQueenId(ShopAttributeValueColorTexture::className(), $valueColorTexture->id, $valueTranslationData['shopAttributeValueColorTexture']['id']);
+                                                    $valueTranslationData['value'] = strval($valueColorTexture->id);
+                                                }
+                                            }
+
+                                        }
                                     }
 
                                     $translation->value_id = $attributeValue->id;
